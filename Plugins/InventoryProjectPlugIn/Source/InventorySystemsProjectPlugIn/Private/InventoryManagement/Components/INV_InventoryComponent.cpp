@@ -7,6 +7,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Widgets/Inventory/InventoryBase/INV_InventoryBase.h"
 #include "Items/INV_InventoryItem.h"
+#include "Items/Fragments/INV_ItemFragment.h"
 
 
 UINV_InventoryComponent::UINV_InventoryComponent() : InventoryList(this)
@@ -15,8 +16,6 @@ UINV_InventoryComponent::UINV_InventoryComponent() : InventoryList(this)
 	SetIsReplicatedByDefault(true);
 	bReplicateUsingRegisteredSubObjectList = true;
 	bInventoryMenuOpen = false;
-
-	
 }
 
 void UINV_InventoryComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -42,6 +41,7 @@ void UINV_InventoryComponent::TryAddItem(UINV_ItemComponent* ItemComponent)
 	if (Result.Item.IsValid() && Result.bStackable)
 	{
 		//Add stacks to an item that already exists in the inventory. We only want to update the stack count, not create a new item of this type.
+		OnStackChange.Broadcast(Result);
 		Server_AddStacksToItem(ItemComponent, Result.TotalRoomToFill, Result.Remainder);
 	}
 	else if (Result.TotalRoomToFill > 0)
@@ -54,19 +54,33 @@ void UINV_InventoryComponent::TryAddItem(UINV_ItemComponent* ItemComponent)
 void UINV_InventoryComponent::Server_AddNewItem_Implementation(UINV_ItemComponent* ItemComponent, int32 StackCount)
 {
 	UINV_InventoryItem* NewItem = InventoryList.AddEntry(ItemComponent);
+	NewItem->SetTotalStackCount(StackCount);
 
 	if (GetOwner()->GetNetMode() == NM_ListenServer || GetOwner()->GetNetMode() == NM_Standalone)
 	{
 		OnItemAdded.Broadcast(NewItem);
 	}
-	// TODO:  Tell the ItemnComponent to destroy its OwningActor.
+	ItemComponent->OnPickedUpItem();
 }
 
 
 void UINV_InventoryComponent::Server_AddStacksToItem_Implementation(UINV_ItemComponent* ItemComponent, int32 StackCount,
 	int32 Remainder)
 {
-	
+	const FGameplayTag& ItemType = IsValid(ItemComponent) ? ItemComponent->GetItemManifest().GetItemType() : FGameplayTag::EmptyTag;
+	UINV_InventoryItem* Item = InventoryList.FindFirstItemByType(ItemType);
+	if (!IsValid(Item)) return;
+
+	Item->SetTotalStackCount(Item->GetTotalStackCount() + StackCount);
+
+	if (Remainder == 0)
+	{
+		ItemComponent->OnPickedUpItem();
+	}
+	else if (FINV_StackableFragment* StackableFragment = ItemComponent->GetItemManifest().GetFragmentOfTypeMutable<FINV_StackableFragment>())
+	{
+		StackableFragment->SetStackCount(Remainder);
+	}
 }
 
 void UINV_InventoryComponent::ToggleInventoryMenu()

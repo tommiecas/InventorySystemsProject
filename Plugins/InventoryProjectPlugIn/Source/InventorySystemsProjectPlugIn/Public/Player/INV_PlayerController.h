@@ -51,14 +51,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character", meta = (AllowPrivateAccess = "true"))
 	ACharacter* ThorneCharacter;
 
-	void Jump();
-	void StopJumping();
-	void Move(const FInputActionValue& Value);
-	void Look(const FInputActionValue& Value);
-
-
-
-
 private:
 	void PrimaryInteract();
 	void CreateHUDWidget();

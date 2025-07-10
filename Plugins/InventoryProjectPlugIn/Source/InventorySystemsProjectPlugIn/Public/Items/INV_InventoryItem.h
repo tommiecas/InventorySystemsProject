@@ -8,7 +8,6 @@
 // #include "Items/Manifest/INV_ItemManifest_InstancedStructSupport.h" // ✅ include the specialization!
 #include "INV_InventoryItem.generated.h"
 
-struct FINV_ItemManifest;
 /*
  *
  */
@@ -28,11 +27,16 @@ private:
 	UPROPERTY(VisibleAnywhere, meta = (BaseStruct = "/Script/InventorySystemsProjectPlugIn.INV_ItemManifest"), Replicated)
 	FInstancedStruct ItemManifest;
 
+	UPROPERTY(Replicated)
+	int32 TotalStackCount{0};
+
 public:
 	void SetItemManifest(const FINV_ItemManifest& Manifest);
 	const FINV_ItemManifest& GetItemManifest() const { return ItemManifest.Get<FINV_ItemManifest>(); }
 	FINV_ItemManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FINV_ItemManifest>(); }
 	bool IsStackable() const;
+	int32 GetTotalStackCount() const { return TotalStackCount; }
+	void SetTotalStackCount(int32 Count) { TotalStackCount = Count; }
 	
 };
 

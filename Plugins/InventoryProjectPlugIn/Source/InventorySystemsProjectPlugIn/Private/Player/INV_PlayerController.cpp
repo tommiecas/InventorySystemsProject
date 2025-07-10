@@ -104,24 +104,22 @@ void AINV_PlayerController::TraceForItem()
 
 	if (ThisActor.IsValid())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ThisActor: %s"), *ThisActor->GetName());
-		UINV_ItemComponent* ItemComponent = ThisActor->FindComponentByClass<UINV_ItemComponent>();
-		if (IsValid(ItemComponent) && IsValid(HUDWidget)) HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
-
-		if (UActorComponent* Highlightable = ThisActor->FindComponentByInterface(UINV_Highlightable::StaticClass()); IsValid(Highlightable))		{
-			{
-				IINV_Highlightable::Execute_Highlight(Highlightable);
-			}
-		}
-
-		if (LastActor.IsValid())
+		if (UActorComponent* Highlightable = ThisActor->FindComponentByInterface(UINV_Highlightable::StaticClass()); IsValid(Highlightable))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("LastActor: %s"), *LastActor->GetName());
-			if (UActorComponent* Highlightable = LastActor->FindComponentByInterface(UINV_Highlightable::StaticClass()); IsValid(Highlightable))		{
-				{
-					IINV_Highlightable::Execute_UnHighlight(Highlightable);
-				}	
-			}
+			IINV_Highlightable::Execute_Highlight(Highlightable);
+		}
+		
+		UINV_ItemComponent* ItemComponent = ThisActor->FindComponentByClass<UINV_ItemComponent>();
+		if (!IsValid(ItemComponent)) return;
+		
+		if (IsValid(HUDWidget)) HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
+	}
+
+	if (LastActor.IsValid())
+	{
+		if (UActorComponent* Highlightable = LastActor->FindComponentByInterface(UINV_Highlightable::StaticClass()); IsValid(Highlightable))		
+		{
+			IINV_Highlightable::Execute_Highlight(Highlightable);
 		}
 	}
 }

@@ -13,6 +13,7 @@ class UINV_InventoryBase;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryItemChange, UINV_InventoryItem*, Item);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FNoRoomInInventory);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStackChange, const FINV_SlotAvilabilityResult&, Result);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_InventoryComponent : public UActorComponent
@@ -21,7 +22,6 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_InventoryComponent : public UActorC
 
 public:
 	UINV_InventoryComponent();
-
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
@@ -39,6 +39,7 @@ public:
 	FInventoryItemChange OnItemAdded;
 	FInventoryItemChange OnItemRemoved;
 	FNoRoomInInventory OnNoRoomInInventory;
+	FStackChange OnStackChange;
 	
 protected:
 	virtual void BeginPlay() override;

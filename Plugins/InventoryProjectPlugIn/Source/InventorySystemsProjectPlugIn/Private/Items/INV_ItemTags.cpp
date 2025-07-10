@@ -1,7 +1,5 @@
 #include "Items/INV_ItemTags.h"
 
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(Axe, "GameItems.Equipment.Weapons.Axe", "Axe")
-
 namespace GameItems
 {
 	namespace Equipment
@@ -26,8 +24,14 @@ namespace GameItems
 		{
 			namespace Red
 			{
-				UE_DEFINE_GAMEPLAY_TAG_COMMENT(Small, "GameItems.Consumables.Potions.Red.Small", "Small Red Potion")
-				UE_DEFINE_GAMEPLAY_TAG_COMMENT(Large, "GameItems.Consumables.Potions.Red.Large", "Large Red Potion")
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Red.Small", "Small Red Potion")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Red.Large", "Large Red Potion")
+			}
+
+			namespace Blue
+			{
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Blue.Small", "Small Blue Potion")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Blue.Large", "Large Blue Potion")
 			}
 		}
 	}
@@ -35,6 +39,7 @@ namespace GameItems
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(FireFernFruit, "GameItems.CraftasbleS.FireFernFruit", "Fire Fern Fruit")
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(LuminDaisy, "GameItems.CraftasbleS.LuminDaisy", "Lumin Daisy")
+		UE_DEFINE_GAMEPLAY_TAG(ScorchPetalBlossom, "GameItems.Craftables.ScorchPetalBlossom", "Scorch Petal Blossom")
 	}
 }
 

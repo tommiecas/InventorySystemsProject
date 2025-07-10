@@ -54,6 +54,7 @@ private:
 
 	UFUNCTION()
 	void ShowCraftables();
+	
 	void DisableButton(UButton* Button);
 
 	void SetActiveGrid(UINV_InventoryGrid* Grid, UButton* Button);

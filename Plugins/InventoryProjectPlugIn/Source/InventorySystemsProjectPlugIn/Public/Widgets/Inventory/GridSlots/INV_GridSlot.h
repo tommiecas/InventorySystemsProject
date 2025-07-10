@@ -26,14 +26,13 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_GridSlot : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void SetTileIndex(int32 Index) { TileIndex = Index; }
-	int32 GetTileIndex() const { return TileIndex; }
+	
 	
 protected:
 
 private:
-	int32 TileIndex;
-	int32 StackCount;
+	int32 TileIndex{INDEX_NONE};
+	int32 StackCount{0};
 	int32 UpperLeftIndex{INDEX_NONE};
 	TWeakObjectPtr<UINV_InventoryItem> InventoryItem;
 	bool bAvailable{true};
@@ -59,6 +58,8 @@ private:
 
 
 public:
+	void SetTileIndex(int32 Index) { TileIndex = Index; }
+	int32 GetTileIndex() const { return TileIndex; }
 	EINV_GridSlotState GetGridSlotState() const { return GridSlotState; }
 	void SetGridSlotState(const EINV_GridSlotState State) { GridSlotState = State; }
 	void SetImageBrush(const FSlateBrush& Brush) const;

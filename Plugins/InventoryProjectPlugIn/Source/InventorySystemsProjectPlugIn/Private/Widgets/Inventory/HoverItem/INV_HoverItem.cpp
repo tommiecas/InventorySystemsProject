@@ -35,13 +35,18 @@ FGameplayTag UINV_HoverItem::GetItemType() const
 	return FGameplayTag();
 }
 
-void UINV_HoverItem::SetIsStackable(const bool bStacks)
+void UINV_HoverItem::SetIsStackable(bool bStacks)
 {
 	bIsStackable = bStacks;
 	if (!bStacks)
 	{
 		Text_StackCount->SetVisibility(ESlateVisibility::Collapsed);
 	}
+}
+
+UINV_InventoryItem* UINV_HoverItem::GetInventoryItem() const
+{
+	return InventoryItem.Get();
 }
 
 void UINV_HoverItem::SetInventoryItem(UINV_InventoryItem* Item)

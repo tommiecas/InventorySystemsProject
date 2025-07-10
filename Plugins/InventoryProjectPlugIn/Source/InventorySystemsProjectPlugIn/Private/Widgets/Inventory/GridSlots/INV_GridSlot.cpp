@@ -6,6 +6,11 @@
 #include "Components/Image.h"
 #include "Items/INV_InventoryItem.h"
 
+void UINV_GridSlot::SetInventoryItem(UINV_InventoryItem* Item)
+{
+	InventoryItem = Item;
+}
+
 void UINV_GridSlot::SetImageBrush(const FSlateBrush& Brush) const
 {
 	Image_GridSlot->SetBrush(Brush);
@@ -37,7 +42,7 @@ void UINV_GridSlot::SetGrayedOutTexture()
 	Image_GridSlot->SetBrush(Brush_GrayedOut);
 }
 
-void UINV_GridSlot::SetInventoryItem(UINV_InventoryItem* Item)
+/* void UINV_GridSlot::SetInventoryItem(UINV_InventoryItem* Item)
 {
 	if (Item && Item->IsValidLowLevelFast())
 	{
@@ -47,4 +52,4 @@ void UINV_GridSlot::SetInventoryItem(UINV_InventoryItem* Item)
 	{
 		InventoryItem = nullptr;
 	}
-}
+}*/

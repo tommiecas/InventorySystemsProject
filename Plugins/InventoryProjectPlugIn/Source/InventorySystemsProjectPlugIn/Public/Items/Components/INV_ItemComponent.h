@@ -17,8 +17,11 @@ public:
 	UINV_ItemComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	void OnPickedUpItem();
+
 protected:
-	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void PickedUpEffects();
 
 private:
 

@@ -2,11 +2,10 @@
 
 
 #include "Widgets/Inventory/Spatial/INV_SpatialInventory.h"
-
+#include "InventorySystemsProjectPlugIn.h"
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
 #include "InventoryManagement/Utilities/INV_InventoryStatics.h"
-#include "InventorySystemsProjectPlugIn.h"
 #include "Widgets/Inventory/Spatial/INV_InventoryGrid.h"
 
 void UINV_SpatialInventory::NativeOnInitialized()

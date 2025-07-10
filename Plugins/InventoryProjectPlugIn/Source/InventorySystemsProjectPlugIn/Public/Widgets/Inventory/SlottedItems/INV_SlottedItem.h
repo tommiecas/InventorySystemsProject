@@ -10,6 +10,8 @@
 class UINV_InventoryItem;
 class UImage;
 class UTextBlock;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSlottedItemClicked, int32, GridIndex, const FPointerEvent& MouseEvent);
 /**
  * 
  */
@@ -19,7 +21,10 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_SlottedItem : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 	void UpdateStackCount(int32 StackCount);
+
+	FSlottedItemClicked OnSlottedItemClicked;
 
 protected:
 

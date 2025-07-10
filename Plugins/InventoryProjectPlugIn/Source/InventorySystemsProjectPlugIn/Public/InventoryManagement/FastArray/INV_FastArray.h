@@ -6,9 +6,7 @@
 
 class UINV_InventoryComponent;
 class UINV_ItemComponent;
-class UINV_InventoryComponent;
 class UINV_InventoryItem;
-class UInv_ItemComponent;
 struct FGameplayTag;
 
 /** A single entry in an inventory */
@@ -45,8 +43,6 @@ struct FINV_InventoryFastArray : public FFastArraySerializer
 	// FFastArraySerializer contract
 	void PreReplicatedRemove(const TArrayView<int32> RemovedIndices, int32 FinalSize);
 	void PostReplicatedAdd(const TArrayView<int32> AddedIndices, int32 FinalSize);
-
-
 	// End of FFastArraySerializer contract
 	
 	bool NetDeltaSerialize(FNetDeltaSerializeInfo& DeltaParams)
