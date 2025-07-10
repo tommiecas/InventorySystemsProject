@@ -1,0 +1,73 @@
+Intermediate/
+DerivedDataCache/
+Saved/
+.vs/
+*.pdb
+*.obj
+*.pch
+*.exp
+*.lib
+*.suo
+*.log
+
+# Build folders
+Binaries/
+Build/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+Intermediate/
+DerivedDataCache/
+Saved/
+.vs/
+*.pdb
+*.obj
+*.pch
+*.exp
+*.lib
+*.suo
+*.log
+
+# Build folders
+Binaries/
+Build/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+
+# Unreal user/project settings
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.userosscache
+*.unsuccessfulbuild
+*.VC.db
+*.VC.opendb
+*.log
+*.tlog
+*.pdb
+
+# Rider project folders
+.idea/
+*.iml
+
+# OSX and Windows garbage
+.DS_Store
+Thumbs.db
+
+# Compiled source
+*.dll
+*.exe
+*.obj
+*.pch
+*.pdb
+*.lib
+*.exp
+*.log
+
+# LFS cleanup
+*.umap
+*.uasset
