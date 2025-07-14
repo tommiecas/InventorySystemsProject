@@ -24,22 +24,22 @@ namespace GameItems
 		{
 			namespace Red
 			{
-				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Red.Small", "Small Red Potion")
-				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Red.Large", "Large Red Potion")
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Red.Small")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Red.Large")
 			}
 
 			namespace Blue
 			{
-				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Blue.Small", "Small Blue Potion")
-				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Blue.Large", "Large Blue Potion")
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Blue.Small")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Blue.Large")
 			}
 		}
 	}
 	namespace CraftasbleS
 	{
-		UE_DEFINE_GAMEPLAY_TAG_COMMENT(FireFernFruit, "GameItems.CraftasbleS.FireFernFruit", "Fire Fern Fruit")
-		UE_DEFINE_GAMEPLAY_TAG_COMMENT(LuminDaisy, "GameItems.CraftasbleS.LuminDaisy", "Lumin Daisy")
-		UE_DEFINE_GAMEPLAY_TAG(ScorchPetalBlossom, "GameItems.Craftables.ScorchPetalBlossom", "Scorch Petal Blossom")
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(FireFernFruit, "GameItems.Craftables.FireFernFruit", "Fire Fern Fruit")
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(LuminDaisy, "GameItems.Craftables.LuminDaisy", "Lumin Daisy")
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(ScorchPetalBlossom, "GameItems.Craftables.ScorchPetalBlossom", "Scorch Petal Blossom")
 	}
 }
 

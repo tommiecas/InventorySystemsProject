@@ -11,6 +11,8 @@ UINV_ItemComponent::UINV_ItemComponent()
 
 	PickupMessage = FString("E - Pick Up Item");
 
+	SetIsReplicatedByDefault(true);
+
 }
 
 void UINV_ItemComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -18,6 +20,11 @@ void UINV_ItemComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ThisClass, ItemManifest);
+}
+
+void UINV_ItemComponent::InitItemManifest(FINV_ItemManifest CopyOfManifest)
+{
+	ItemManifest = CopyOfManifest;
 }
 
 void UINV_ItemComponent::OnPickedUpItem()

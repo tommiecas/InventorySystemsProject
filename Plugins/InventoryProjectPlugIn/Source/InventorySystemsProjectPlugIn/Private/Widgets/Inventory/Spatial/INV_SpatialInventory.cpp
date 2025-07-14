@@ -16,7 +16,17 @@ void UINV_SpatialInventory::NativeOnInitialized()
 	Button_Consumables->OnClicked.AddDynamic(this, &ThisClass::ShowConsumables);
 	Button_Craftables->OnClicked.AddDynamic(this, &ThisClass::ShowCraftables);
 
+	Grid_Equippables->SetOwningCanvasPanel(CanvasPanel);
+	Grid_Consumables->SetOwningCanvasPanel(CanvasPanel);
+	Grid_Craftables->SetOwningCanvasPanel(CanvasPanel);
+	
 	ShowEquippables();
+}
+
+FReply UINV_SpatialInventory::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	ActiveGrid->DropItem();
+	return FReply::Handled();
 }
 
 FINV_SlotAvailabilityResult UINV_SpatialInventory::HasRoomForItem(UINV_ItemComponent* ItemComponent) const
@@ -60,6 +70,9 @@ void UINV_SpatialInventory::DisableButton(UButton* Button)
 
 void UINV_SpatialInventory::SetActiveGrid(UINV_InventoryGrid* Grid, UButton* Button)
 {
+	if (ActiveGrid.IsValid()) ActiveGrid->HideCursor();
+	ActiveGrid = Grid;
+	if (ActiveGrid.IsValid()) ActiveGrid->ShowCursor();
 	DisableButton(Button);
 	Switcher->SetActiveWidget(Grid);
 }

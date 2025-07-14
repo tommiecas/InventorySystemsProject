@@ -21,7 +21,7 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_HoverItem : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void UpdateStackCount(int32 Count) const;
+	void UpdateStackCount(int32 Count);
 
 private:
 	UPROPERTY(meta = (BindWidget))

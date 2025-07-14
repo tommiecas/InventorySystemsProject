@@ -5,7 +5,7 @@
 #include "Blueprint/SlateBlueprintLibrary.h"
 #include "Components/Widget.h"
 
-FVector2D UINV_WidgetUtilities::GetWidgetPosition(const UWidget* Widget)
+FVector2D UINV_WidgetUtilities::GetWidgetPosition(UWidget* Widget)
 {
 	const FGeometry Geometry = Widget->GetCachedGeometry();
 	FVector2D PixelPosition;

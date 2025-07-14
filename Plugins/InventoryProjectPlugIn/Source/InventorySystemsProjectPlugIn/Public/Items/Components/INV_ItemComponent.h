@@ -16,7 +16,7 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_ItemComponent : public UActorCompon
 public:
 	UINV_ItemComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-
+	void InitItemManifest(FINV_ItemManifest CopyOfManifest);
 	void OnPickedUpItem();
 
 protected:

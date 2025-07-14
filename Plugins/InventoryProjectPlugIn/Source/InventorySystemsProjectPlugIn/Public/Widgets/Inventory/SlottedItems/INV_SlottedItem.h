@@ -11,7 +11,7 @@ class UINV_InventoryItem;
 class UImage;
 class UTextBlock;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSlottedItemClicked, int32, GridIndex, const FPointerEvent& MouseEvent);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSlottedItemClicked, int32, GridIndex, const FPointerEvent&, MouseEvent);
 /**
  * 
  */

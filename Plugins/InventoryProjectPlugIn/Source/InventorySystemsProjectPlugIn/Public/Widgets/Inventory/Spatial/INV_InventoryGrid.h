@@ -8,6 +8,7 @@
 #include "Types/INV_GridTypes.h"
 #include "INV_InventoryGrid.generated.h"
 
+class UINV_ItemPopUpWidget;
 struct FINV_GridFragment;
 struct FINV_ItemManifest;
 class UINV_SlottedItem;
@@ -38,11 +39,24 @@ public:
 
 	UFUNCTION()
 	void AddItem(UINV_InventoryItem* Item);
+
+	void ShowCursor();
+	void HideCursor();
+	void DropItem();
+
+	
+	UPROPERTY(EditAnywhere, Category = "Sound Effects")
+	class USoundBase* BuzzerSound;
+
+	UFUNCTION(BlueprintCallable, Category = "Sound Effects")
+	void PlayBuzzer() const;
+
+	
 	
 protected:
 
 private:
-
+	TWeakObjectPtr<UCanvasPanel> OwningCanvasPanel;
 	TWeakObjectPtr<UINV_InventoryComponent> InventoryComponent;
 	
 	void ConstructGrid();
@@ -97,12 +111,62 @@ private:
 	void HighlightSlots(const int32 Index, const FIntPoint& Dimensions);
 	void UnHighlightSlots(const int32 Index, const FIntPoint& Dimensions);
 	void ChangeHoverType(const int32 Index, const FIntPoint& Dimensions, EINV_GridSlotState GridSlotState);
+	void PutDownOnIndex(const int32 Index);
+	void ClearHoverItem();
+	UUserWidget* GetVisibleCursorWidget();
+	UUserWidget* GetHiddenCursorWidget();
+	bool IsSameStackable(const UINV_InventoryItem* ClickedInventoryItem) const;
+	void SwapWithHoverItem(UINV_InventoryItem* ClickedInventoryItem, const int32 GridIndex);
+	bool ShouldSwapStackCounts(const int32 RoomInClickedSlot, const int32 HoveredStackCount, const int32 MaxStackSize) const;
+	void SwapStackCounts(const int32 ClickedStackCount, const int32 HoveredStackCount, const int32 Index);
+	bool ShouldConsumeHoverItemStacks(const int32 HoveredStackCount, const int32 RoomInClickedSlot) const;
+	void ConsumeHoverItemStacks(const int32 ClickedStackCount, const int32 HoveredStackCount, const int32 Index);
+	bool ShouldFillInStack(const int32 RoomInClickedSlot, const int32 HoveredStackCount) const;
+	void FillInStack(const int32 FillAmount, const int32 Remainder, const int32 Index);
+	void CreateItemPopUpWidget(const int32 GridIndex);
 	
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<UINV_ItemPopUpWidget> ItemPopUpWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UINV_ItemPopUpWidget> ItemPopUpWidget;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<UUserWidget> VisibleCursorWidgetClass;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<UUserWidget> HiddenCursorWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> VisibleCursorWidget;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> HiddenCursorWidget;
+
 	UFUNCTION()
 	void AddStacks(const FINV_SlotAvailabilityResult& Result);
 
 	UFUNCTION()
 	void OnSlottedItemClicked(int32 GridIndex, const FPointerEvent& MouseEvent);
+
+	UFUNCTION()
+	void OnGridSlotClicked (int32 GridIndex, const FPointerEvent& MouseEvent);
+
+	UFUNCTION()
+	void OnGridSlotHovered(int32 GridIndex, const FPointerEvent& MouseEvent);
+
+	UFUNCTION()
+	void OnGridSlotUnhovered(int32 GridIndex, const FPointerEvent& MouseEvent);
+
+	UFUNCTION()
+	void OnPopUpMenuSplit(int32 SplitAmount, int Index);
+
+	UFUNCTION()
+	void OnPopUpMenuDrop(int Index);
+
+	UFUNCTION()
+	void OnPopUpMenuConsume(int Index);
+	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Inventory")
 	EINV_ItemCategory ItemCategory = EINV_ItemCategory::Consumable;
@@ -134,8 +198,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	TSubclassOf<UINV_HoverItem> HoverItemClass;
 
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	FVector2D ItemPopUpOffset;
+
 	UPROPERTY()
 	TObjectPtr<UINV_HoverItem> HoverItem;
+
+	
 
 	FINV_TileParameters TileParameters;
 	FINV_TileParameters LastTileParameters;
@@ -152,5 +221,8 @@ public:
 	EINV_ItemCategory GetItemCategory() const { return ItemCategory; }
 	void SetSlottedItemImage(const FINV_GridFragment* GridFragment, const FINV_ImageFragment* ImageFragment,
 							 UINV_SlottedItem* SlottedItem);
+	void SetOwningCanvasPanel(UCanvasPanel* OwningPanel);
+	
 
 };
+

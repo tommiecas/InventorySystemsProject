@@ -8,8 +8,9 @@
 #include "Items/INV_InventoryItem.h"
 #include "Items/Manifest/INV_ItemManifest.h"
 
-void UINV_HoverItem::UpdateStackCount(int32 Count) const
+void UINV_HoverItem::UpdateStackCount(int32 Count)
 {
+	StackCount = Count;
 	if (Count > 0)
 	{
 		Text_StackCount->SetText(FText::AsNumber(Count));
@@ -42,11 +43,6 @@ void UINV_HoverItem::SetIsStackable(bool bStacks)
 	{
 		Text_StackCount->SetVisibility(ESlateVisibility::Collapsed);
 	}
-}
-
-UINV_InventoryItem* UINV_HoverItem::GetInventoryItem() const
-{
-	return InventoryItem.Get();
 }
 
 void UINV_HoverItem::SetInventoryItem(UINV_InventoryItem* Item)

@@ -27,6 +27,11 @@ struct INVENTORYSYSTEMSPROJECTPLUGIN_API FINV_ItemManifest
 
 	template<typename T> requires std::derived_from<T, FINV_ItemFragment>
 	const T* GetFragmentOfType() const;
+
+	template<typename T> requires std::derived_from<T, FINV_ItemFragment>
+	T* GetFragmentOfTypeMutable();
+
+	void SpawnPickupActor(const UObject* WorldContextObject, const FVector& SpawnLocation, const FRotator& SpawnRotation);;
 	
 private:
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (ExcludeBaseStruct))
@@ -35,8 +40,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	EINV_ItemCategory ItemCategory{EINV_ItemCategory::None};
 
-	UPROPERTY(EditAnywhere, Category = "Inventory")
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "GameItems"))
 	FGameplayTag ItemType;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<AActor> PickupActorClass;
 
 	
 
@@ -72,5 +80,19 @@ const T* FINV_ItemManifest::GetFragmentOfType() const
 			return FragmentPtr;
 		}
 	}
+	return nullptr;
+}
+
+template <typename T> requires std::derived_from<T, FINV_ItemFragment>
+T* FINV_ItemManifest::GetFragmentOfTypeMutable()
+{
+	for (TInstancedStruct<FINV_ItemFragment>& Fragment : Fragments)
+	{
+		if (T* FragmentPtr = Fragment.GetMutablePtr<T>())
+		{
+			return FragmentPtr;
+		}
+	}
+	
 	return nullptr;
 }

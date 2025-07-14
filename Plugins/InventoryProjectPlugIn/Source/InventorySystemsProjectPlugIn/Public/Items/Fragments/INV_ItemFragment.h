@@ -23,7 +23,7 @@ struct FINV_ItemFragment
 	virtual ~FINV_ItemFragment() {}
 
 private:
-	UPROPERTY(EditAnywhere, Category = "Inventory")
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories="FragmentTags"))
 	FGameplayTag FragmentTag = FGameplayTag::EmptyTag;
 
 public:
@@ -109,4 +109,64 @@ public:
 	void AddStackCount(const int32 NewStackCount) { StackCount += NewStackCount; }
 	void RemoveStackCount(const int32 NewStackCount) { StackCount -= NewStackCount; }
 	bool CanStackWith(const FINV_StackableFragment& Other) const { return MaxStackSize == Other.MaxStackSize; }
+};
+
+/********************************
+*****                       *****
+*****   CONSUMABLE STRUCT   *****
+*****                       *****
+********************************/
+
+USTRUCT(BlueprintType)
+struct FINV_ConsumableFragment : public FINV_ItemFragment
+{
+	GENERATED_BODY()
+
+	virtual void OnConsume(APlayerController* PlayerController) {}
+private:
+
+public:
+	
+};
+
+/************************************
+*****                           *****
+*****   HEASLTH POTION STRUCT   *****
+*****                           *****
+************************************/
+
+USTRUCT(BlueprintType)
+struct FINV_HealthPotionFragment : public FINV_ConsumableFragment
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	float HealAmount = 20.f;
+
+	virtual void OnConsume(APlayerController* PlayerController) override;
+private:
+
+public:
+	
+};
+
+/*********************************
+*****                        *****
+*****   MANA POTION STRUCT   *****
+*****                        *****
+*********************************/
+
+USTRUCT(BlueprintType)
+struct FINV_ManaPotionFragment : public FINV_ConsumableFragment
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	float ManaAmount = 20.f;
+
+	virtual void OnConsume(APlayerController* PlayerController) override;
+private:
+
+public:
+	
 };
