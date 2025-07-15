@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "InventoryManagement/FastArray/INV_FastArray.h"
+#include "Widgets/Inventory/InventoryBase/INV_InventoryBase.h"
 #include "INV_InventoryComponent.generated.h"
 
 class UINV_ItemComponent;
@@ -87,5 +88,6 @@ private:
 
 
 public:
+	UINV_InventoryBase* GetInventoryMenu() const { return InventoryMenu; }
 
 };

@@ -21,3 +21,27 @@ EINV_ItemCategory UINV_InventoryStatics::GetItemCategoryFromItemComponent(UINV_I
 	return ItemComp->GetItemManifest().GetItemCategory();
 }
 
+void UINV_InventoryStatics::ItemHovered(APlayerController* PlayerController, UINV_InventoryItem* Item)
+{
+	UINV_InventoryComponent* InventoryComponent = GetInventoryComponent(PlayerController);
+	if (!IsValid(InventoryComponent)) return;
+
+	UINV_InventoryBase* InventoryBase = InventoryComponent->GetInventoryMenu();
+	if (!IsValid(InventoryBase)) return;
+
+	if (InventoryBase->HasHoverItem()) return;
+
+	InventoryBase->OnItemHovered(Item);
+}
+
+void UINV_InventoryStatics::ItemUnhovered(APlayerController* PlayerController)
+{
+	UINV_InventoryComponent* InventoryComponent = GetInventoryComponent(PlayerController);
+	if (!IsValid(InventoryComponent)) return;
+
+	UINV_InventoryBase* InventoryBase = InventoryComponent->GetInventoryMenu();
+	if (!IsValid(InventoryBase)) return;
+
+	InventoryBase->OnItemUnhovered();
+}
+

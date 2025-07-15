@@ -33,6 +33,12 @@ namespace GameItems
 				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Blue.Small")
 				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Blue.Large")
 			}
+
+			namespace Purple
+			{
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Purple.Small")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Purple.Large")
+			}
 		}
 	}
 	namespace CraftasbleS

@@ -22,6 +22,8 @@ class INVENTORYSYSTEMSPROJECTPLUGIN_API UINV_SlottedItem : public UUserWidget
 
 public:
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+	virtual void NativeOnMouseEnter(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& MouseEvent) override;
 	void UpdateStackCount(int32 StackCount);
 
 	FSlottedItemClicked OnSlottedItemClicked;

@@ -5,11 +5,22 @@
 #include "Items/INV_InventoryItem.h"
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
+#include "InventoryManagement/Utilities/INV_InventoryStatics.h"
 
 FReply UINV_SlottedItem::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 	OnSlottedItemClicked.Broadcast(GridIndex, MouseEvent);
 	return FReply::Handled();
+}
+
+void UINV_SlottedItem::NativeOnMouseEnter(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	UINV_InventoryStatics::ItemHovered(GetOwningPlayer(), InventoryItem.Get());
+}
+
+void UINV_SlottedItem::NativeOnMouseLeave(const FPointerEvent& MouseEvent)
+{
+	UINV_InventoryStatics::ItemUnhovered(GetOwningPlayer());UINV_InventoryStatics::ItemUnhovered(GetOwningPlayer());
 }
 
 void UINV_SlottedItem::UpdateStackCount(int32 StackCount)

@@ -36,6 +36,11 @@ namespace GameItems
 				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
 				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
 			}
+			namespace Purple
+			{
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
+			}
 		}
 	}
 

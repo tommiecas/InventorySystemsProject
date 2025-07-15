@@ -43,6 +43,7 @@ public:
 	void ShowCursor();
 	void HideCursor();
 	void DropItem();
+	bool HasHoverItem() const;
 
 	
 	UPROPERTY(EditAnywhere, Category = "Sound Effects")
